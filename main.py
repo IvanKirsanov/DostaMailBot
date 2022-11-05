@@ -1,10 +1,6 @@
 import logging
-import os
-import aiogram.types
 from aiogram import Bot, Dispatcher, executor, types
-from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton
 from config import TOKEN
 
 bot = Bot(token=TOKEN)
