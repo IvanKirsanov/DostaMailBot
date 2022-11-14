@@ -1,14 +1,15 @@
 from aiogram import types
 from typing import List
+import re
 
 
 def search_chat_id(msg_text: str, dep_id: dict) -> int:
-    temp = msg_text.lower().split('\n')[:4]  # берём первые 4 абзаца сообщения и переводим в нижний регистр
-    for chat_id, dep in dep_id.items():
-        for values in dep:
-            for line in temp:
-                if values in line:
-                    return values  # !!! исправить на chat_id
+    msg_text_lower = msg_text.lower().split('\n')[:4]  # берём первые 4 абзаца сообщения и переводим в нижний регистр
+    for chat_id, dep_name in dep_id.items():
+        for name in dep_name:
+            for line in msg_text_lower:
+                if re.search(pattern=name, string=line):
+                    return name[2:-2]  # !!! исправить на chat_id
     return 0
 
 
