@@ -5,13 +5,14 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from middleware import AlbumMiddleware
 from config import TOKEN, dep_chat_id
 from functions import create_media_group, search_chat_id
+from filter import IsRightChat
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 logging.basicConfig(level=logging.INFO)
 
 
-@dp.message_handler(content_types=[types.ContentType.PHOTO, types.ContentType.VIDEO,
+@dp.message_handler(IsRightChat(), content_types=[types.ContentType.PHOTO, types.ContentType.VIDEO,
                                    types.ContentType.DOCUMENT])
 async def handle_albums(message: types.Message, album: List[types.Message]):
     msg_text = album[0].caption
@@ -28,4 +29,5 @@ async def handle_albums(message: types.Message, album: List[types.Message]):
 
 if __name__ == '__main__':
     dp.middleware.setup(AlbumMiddleware())
+    dp.bind_filter(IsRightChat)
     executor.start_polling(dp, skip_updates=True)
