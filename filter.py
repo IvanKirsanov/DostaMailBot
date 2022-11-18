@@ -1,11 +1,11 @@
 from aiogram.dispatcher.filters import Filter
 from aiogram import types
-from config import chat_id
+from config import source_chat_id
 
 
-class IsRightChat(Filter):
+class IsSourceChat(Filter):
     """Фильтр для проверки источника сообщений."""
-    key = "is_right_chat"
+    key = "is_source_chat"
 
     async def check(self, message: types.Message):
-        return message.chat.id == chat_id
+        return message.chat.id == source_chat_id

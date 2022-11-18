@@ -9,11 +9,11 @@ def search_chat_id(msg_text: str, dep_id: dict) -> int:
         for name in dep_name:
             for line in msg_text_lower:
                 if re.search(pattern=name, string=line):
-                    return name[2:-2]  # !!! исправить на chat_id
+                    return chat_id
     return 0
 
 
-def create_media_group(message: types.Message, album: List[types.Message], text: str) -> types.MediaGroup:
+def create_media_group(message: types.Message, album: List[types.Message]) -> types.MediaGroup:
     media_group = types.MediaGroup()
     for obj in album:
         if obj.photo:
@@ -22,6 +22,5 @@ def create_media_group(message: types.Message, album: List[types.Message], text:
             file_id = obj[obj.content_type].file_id
 
         media_group.attach({"media": file_id, "type": obj.content_type,
-                            "caption": text if album.index(obj) == 0 else ""})
-                         # !!! "caption": message.caption if album.index(obj) == 0 else ""})
+                            "caption": message.caption if album.index(obj) == 0 else ""})
     return media_group
