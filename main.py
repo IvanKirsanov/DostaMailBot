@@ -9,7 +9,7 @@ from filter import IsSourceChat
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
-logging.basicConfig(filename='app.log', format='%(asctime)s - %(message)s', level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 
 @dp.message_handler(IsSourceChat(), content_types=[types.ContentType.PHOTO, types.ContentType.VIDEO,
