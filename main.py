@@ -1,13 +1,14 @@
+import os
 import logging
 from typing import List
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from middleware import AlbumMiddleware
-from config import TOKEN, dep_chat_id
+from config import dep_chat_id
 from functions import create_media_group, search_chat_id, find_caption
 from filter import IsSourceChat
 
-bot = Bot(token=TOKEN)
+bot = Bot(token=os.environ['TOKEN'])
 dp = Dispatcher(bot, storage=MemoryStorage())
 logging.basicConfig(level=logging.INFO)
 
